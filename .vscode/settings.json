@@ -1,0 +1,9 @@
+{
+	"files.associations": {
+		"sol_long.h": "c",
+		"unistd.h": "c",
+		"so_long.h": "c",
+		"stdlib.h": "c",
+		"string.h": "c"
+	}
+}
