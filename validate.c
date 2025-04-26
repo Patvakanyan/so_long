@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:31:34 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/24 19:49:04 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:09:45 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	is_correct_str(char *str, int len)
 	int	i;
 	int	actual_len;
 
-	actual_len = ft_strlen(str) - 1;
+	actual_len = ft_strlen(str);
+	if (str[actual_len - 1] == '\n')
+		--actual_len;
 	if (actual_len != len)
 		return (0);
 	i = 0;
@@ -39,7 +41,7 @@ int	ft_valide(char *file_name, t_map *map)
 	map->width = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (ft_printf("%s\n%d\n", file_name, fd), 0);
 	str = get_next_line(fd);
 	map->height = ft_strlen(str) - 1;
 	while (str)

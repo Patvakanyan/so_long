@@ -1,6 +1,6 @@
 NAME		=	so_long
 
-SRC			= so_long.c validate.c so_long_utils.c
+SRC			= so_long.c validate.c so_long_utils.c so_long_moves.c
 OBJ			= $(SRC:.c=.o)
 
 CC			= cc

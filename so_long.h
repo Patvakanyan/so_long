@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/24 18:50:05 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/04/26 20:00:30 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,17 @@ typedef struct s_map
 	void	*map_collectibles;
 	void	*map_exit;
 	void	*map_personage;
+	int		move;
 	int		height;
 	int		width;
 }			t_map;
 
 # define SIZE 32
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 # define wall '1'
 # define collectibles 'C'
 # define exit_map 'E'
@@ -40,5 +46,11 @@ typedef struct s_map
 int			ft_valide(char *str, t_map *map);
 void		print_error(t_map *map, char *str, int code);
 void		ft_free(char **str);
+void		move_player(t_map *map, char behavior);
+int			key_hook(int keycode, t_map *map);
+int			close_game(t_map *map);
+void		player_position(t_map *map, int *x, int *y);
+void		render(t_map *map);
+int			count_coins(t_map *map);
 
 #endif
