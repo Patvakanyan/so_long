@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:15:55 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/26 20:07:44 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:08:57 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 int	close_game(t_map *map)
 {
+	mlx_destroy_image(map->mlx_ptr, map->map_collectibles);
+	mlx_destroy_image(map->mlx_ptr, map->map_exit);
+	mlx_destroy_image(map->mlx_ptr, map->map_wall);
+	mlx_destroy_image(map->mlx_ptr, map->map_personage);
 	mlx_destroy_window(map->mlx_ptr, map->mlx_win);
-	free(map->map_matrix);
+	mlx_destroy_display(map->mlx_ptr);
+	free(map->mlx_ptr);
+	ft_free(map->map_matrix, map->width);
+	free(map);
 	exit(0);
 }
 
@@ -126,7 +133,7 @@ void	move_player(t_map *map, char behavior)
 	coin = count_coins(map);
 	y = -1;
 	player_position(map, &x, &y);
-	ft_printf("coin = %d\n", coin);
+	// ft_printf("coin = %d\n", coin);
 	if (behavior == 'A')
 		move_left(map, x, y, coin);
 	else if (behavior == 'S')

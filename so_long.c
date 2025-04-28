@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:25:39 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/26 16:21:31 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:07:40 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,32 +45,11 @@ int	img_init(t_map *map)
 	return (1);
 }
 
-char	**matrix(char *file_name, int width)
-{
-	int		fd;
-	int		i;
-	char	**ret;
-
-	i = -1;
-	fd = open(file_name, O_RDONLY);
-	ret = (char **)malloc(sizeof(char *) * (width));
-	if (!ret || fd < 0)
-		return (NULL);
-	while (++i < width)
-	{
-		ret[i] = get_next_line(fd);
-		if (!ret[i])
-			return (ft_free(ret), NULL);
-	}
-	close(fd);
-	return (ret);
-}
-
 int	ft_draw_map(char *file_name, t_map *map)
 {
-	map->map_matrix = matrix(file_name, map->width); // free
+	map->map_matrix = matrix(file_name, map->width);
 	if (!img_init(map) || !(map->map_matrix))
-		return (0);
+		return (close_game(map), 0);
 	render(map);
 	return (1);
 }

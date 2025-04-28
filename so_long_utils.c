@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:50:22 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/26 19:18:00 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:36:53 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	print_error(t_map *map, char *str, int code)
 	exit(code);
 }
 
-void	ft_free(char **str)
+void	ft_free(char **str, int width)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (++i < width)
 	{
 		free(str[i]);
 		++i;
