@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/28 16:08:14 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:42:14 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_map
 	int		height;
 	int		width;
 }			t_map;
-// 95973
+
 # define SIZE 32
 # define KEY_ESC 65307
 # define KEY_W 119

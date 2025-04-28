@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:50:22 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/28 16:36:53 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:50:31 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int	count_coins(t_map *map)
 
 void	player_position(t_map *map, int *x, int *y)
 {
-	while (++(*y) < map->height)
+	while (++(*y) < map->width)
 	{
 		*x = -1;
-		while (++(*x) < map->width)
+		while (++(*x) < map->height)
 			if (map->map_matrix[*y][*x] == personage
 				|| map->map_matrix[*y][*x] == 'T')
 				return ;
@@ -86,7 +86,7 @@ void	ft_free(char **str, int width)
 	int	i;
 
 	i = 0;
-	while (++i < width)
+	while (i < width)
 	{
 		free(str[i]);
 		++i;
