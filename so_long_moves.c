@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:15:55 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/28 17:45:37 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:48:36 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,89 +41,6 @@ int	key_hook(int keycode, t_map *map)
 	return (1);
 }
 
-void	move_left(t_map *map, int x, int y, int coin)
-{
-	if (coin && map->map_matrix[y][x - 1] == exit_map)
-	{
-		map->map_matrix[y][x - 1] = 'T';
-		map->map_matrix[y][x] = '0';
-		render(map);
-	}
-	else if (!coin && map->map_matrix[y][x - 1] == exit_map)
-		close_game(map);
-	else if (map->map_matrix[y][x - 1] != '1')
-	{
-		map->map_matrix[y][x - 1] = 'P';
-		if (map->map_matrix[y][x] == 'T')
-			map->map_matrix[y][x] = 'E';
-		else
-			map->map_matrix[y][x] = '0';
-		render(map);
-	}
-}
-
-void	move_right(t_map *map, int x, int y, int coin)
-{
-	if (coin && map->map_matrix[y][x + 1] == exit_map)
-	{
-		map->map_matrix[y][x + 1] = 'T';
-		map->map_matrix[y][x] = '0';
-		render(map);
-	}
-	else if (!coin && map->map_matrix[y][x + 1] == exit_map)
-		close_game(map);
-	else if (map->map_matrix[y][x + 1] != '1')
-	{
-		map->map_matrix[y][x + 1] = 'P';
-		if (map->map_matrix[y][x] == 'T')
-			map->map_matrix[y][x] = 'E';
-		else
-			map->map_matrix[y][x] = '0';
-		render(map);
-	}
-}
-
-void	move_bottom(t_map *map, int x, int y, int coin)
-{
-	if (coin && map->map_matrix[y + 1][x] == exit_map)
-	{
-		map->map_matrix[y + 1][x] = 'T';
-		map->map_matrix[y][x] = '0';
-		render(map);
-	}
-	else if (!coin && map->map_matrix[y + 1][x] == exit_map)
-		close_game(map);
-	else if (map->map_matrix[y + 1][x] != '1')
-	{
-		map->map_matrix[y + 1][x] = 'P';
-		if (map->map_matrix[y][x] == 'T')
-			map->map_matrix[y][x] = 'E';
-		else
-			map->map_matrix[y][x] = '0';
-		render(map);
-	}
-}
-void	move_top(t_map *map, int x, int y, int coin)
-{
-	if (coin && map->map_matrix[y - 1][x] == exit_map)
-	{
-		map->map_matrix[y - 1][x] = 'T';
-		map->map_matrix[y][x] = '0';
-		render(map);
-	}
-	else if (!coin && map->map_matrix[y - 1][x] == exit_map)
-		close_game(map);
-	else if (map->map_matrix[y - 1][x] != '1')
-	{
-		map->map_matrix[y - 1][x] = 'P';
-		if (map->map_matrix[y][x] == 'T')
-			map->map_matrix[y][x] = 'E';
-		else
-			map->map_matrix[y][x] = '0';
-		render(map);
-	}
-}
-
 void	move_player(t_map *map, char behavior)
 {
 	int	x;
@@ -133,7 +50,6 @@ void	move_player(t_map *map, char behavior)
 	coin = count_coins(map);
 	y = -1;
 	player_position(map, &x, &y);
-	// ft_printf("coin = %d\n", coin);
 	if (behavior == 'A')
 		move_left(map, x, y, coin);
 	else if (behavior == 'S')

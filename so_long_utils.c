@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:50:22 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/28 17:50:31 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:39:20 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	render(t_map *map)
 		x = -1;
 		while (++x < map->height)
 		{
-			if (map->map_matrix[y][x] == wall)
+			if (map->map_matrix[y][x] == WALL)
 				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win,
 					map->map_wall, x * SIZE, y * SIZE);
-			else if (map->map_matrix[y][x] == exit_map)
+			else if (map->map_matrix[y][x] == EXIT_MAP)
 				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win,
 					map->map_exit, x * SIZE, y * SIZE);
-			else if (map->map_matrix[y][x] == personage
+			else if (map->map_matrix[y][x] == PERSONAGE
 				|| map->map_matrix[y][x] == 'T')
 				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win,
 					map->map_personage, x * SIZE, y * SIZE);
-			else if (map->map_matrix[y][x] == collectibles)
+			else if (map->map_matrix[y][x] == COLLECTIBLES)
 				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win,
 					map->map_collectibles, x * SIZE, y * SIZE);
 		}
@@ -54,7 +54,7 @@ int	count_coins(t_map *map)
 		j = -1;
 		while (++j < map->height)
 		{
-			if (map->map_matrix[i][j] == collectibles)
+			if (map->map_matrix[i][j] == COLLECTIBLES)
 				++count;
 		}
 	}
@@ -67,7 +67,7 @@ void	player_position(t_map *map, int *x, int *y)
 	{
 		*x = -1;
 		while (++(*x) < map->height)
-			if (map->map_matrix[*y][*x] == personage
+			if (map->map_matrix[*y][*x] == PERSONAGE
 				|| map->map_matrix[*y][*x] == 'T')
 				return ;
 	}
