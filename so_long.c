@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:25:39 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/28 16:07:40 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:32:56 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	img_init(t_map *map)
 		return (mlx_destroy_image(map->mlx_ptr, map->map_wall),
 			mlx_destroy_image(map->mlx_ptr, map->map_collectibles), 0);
 	map->map_personage = mlx_xpm_file_to_image(map->mlx_ptr,
-			"./sprites/Pac-Man/pac_semi_up.xpm", &all_size, &all_size);
+			"./sprites/Pac-Man/pac_closed.xpm", &all_size, &all_size);
 	if (!(map->map_personage))
 		return (mlx_destroy_image(map->mlx_ptr, map->map_wall),
 			mlx_destroy_image(map->mlx_ptr, map->map_collectibles),
@@ -48,7 +48,7 @@ int	img_init(t_map *map)
 int	ft_draw_map(char *file_name, t_map *map)
 {
 	map->map_matrix = matrix(file_name, map->width);
-	if (!img_init(map) || !(map->map_matrix))
+	if (!img_init(map) || !(map->map_matrix) || !is_correct_map(map))
 		return (close_game(map), 0);
 	render(map);
 	return (1);
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 		print_error(NULL, "Error\n", STDERR_FILENO);
 	if (argc != 2)
 		print_error(map, "Error\n", STDERR_FILENO);
-	if (!ft_valide(argv[1], map))
+	if (!ft_validate(argv[1], map))
 		print_error(map, "Error\n", STDERR_FILENO);
 	if (!ft_draw(argv[1], map))
 		print_error(map, "Error\n", STDERR_FILENO);

@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/28 17:42:14 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:53:07 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef struct s_map
 	int		width;
 }			t_map;
 
+typedef struct s_player
+{
+	int		px;
+	int		py;
+	char	***arr;
+	t_map	*map;
+}			t_player;
 # define SIZE 32
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -42,7 +49,8 @@ typedef struct s_map
 # define exit_map 'E'
 # define personage 'P'
 
-int			ft_valide(char *str, t_map *map);
+int			is_correct_map(t_map *map);
+int			ft_validate(char *str, t_map *map);
 void		print_error(t_map *map, char *str, int code);
 void		ft_free(char **str, int width);
 void		move_player(t_map *map, char behavior);
