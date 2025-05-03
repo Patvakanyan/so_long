@@ -6,39 +6,27 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:50:22 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/02 12:26:09 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/03 23:12:01 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	render(t_map *map)
+void	choose_img(t_player *player, int x, int y)
 {
-	int	y;
-	int	x;
-
-	y = -1;
-	mlx_clear_window(map->mlx_ptr, map->mlx_win);
-	while (++y < map->width)
-	{
-		x = -1;
-		while (++x < map->height)
-		{
-			if (map->map_matrix[y][x] == WALL)
-				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win,
-					map->map_wall, x * SIZE, y * SIZE);
-			else if (map->map_matrix[y][x] == EXIT_MAP)
-				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win,
-					map->map_exit, x * SIZE, y * SIZE);
-			else if (map->map_matrix[y][x] == PERSONAGE
-				|| map->map_matrix[y][x] == 'T')
-				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win,
-					map->map_personage, x * SIZE, y * SIZE);
-			else if (map->map_matrix[y][x] == COLLECTIBLES)
-				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win,
-					map->map_collectibles, x * SIZE, y * SIZE);
-		}
-	}
+	if (player->map->map_matrix[y][x] == WALL)
+		mlx_put_image_to_window(player->map->mlx_ptr, player->map->mlx_win,
+			player->map->map_wall, x * SIZE, y * SIZE);
+	else if (player->map->map_matrix[y][x] == EXIT_MAP)
+		mlx_put_image_to_window(player->map->mlx_ptr, player->map->mlx_win,
+			player->map->map_exit, x * SIZE, y * SIZE);
+	else if (player->map->map_matrix[y][x] == PERSONAGE
+		|| player->map->map_matrix[y][x] == 'T')
+		mlx_put_image_to_window(player->map->mlx_ptr, player->map->mlx_win,
+			player->pac_man[player->current_frame], x * SIZE, y * SIZE);
+	else if (player->map->map_matrix[y][x] == COLLECTIBLES)
+		mlx_put_image_to_window(player->map->mlx_ptr, player->map->mlx_win,
+			player->map->map_collectibles, x * SIZE, y * SIZE);
 }
 
 int	count_coins(t_map *map)

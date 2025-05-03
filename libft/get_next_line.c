@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:49:51 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/04/28 16:36:56 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/03 22:30:18 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*get_next_line(int fd)
 	static char	*line;
 
 	if (fd < 0 || BUFFER_SIZE == 0)
-		return (NULL);
+		return (free(line), NULL);
 	line = get_line(fd, line);
 	if (!line)
 		return (NULL);

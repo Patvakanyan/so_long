@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/01 17:47:36 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/03 23:13:57 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft/libft.h"
 # include "mlx/mlx.h"
-# include <stdio.h>
+// # include <stdio.h>
 # include <string.h>
 
 typedef struct s_map
@@ -26,7 +26,11 @@ typedef struct s_map
 	void	*map_wall;
 	void	*map_collectibles;
 	void	*map_exit;
-	void	*map_personage;
+	int		all_size;
+	// void	*map_personage;
+	int		x;
+	int		y;
+	int		behavior;
 	int		height;
 	int		width;
 }			t_map;
@@ -36,6 +40,10 @@ typedef struct s_player
 	int		px;
 	int		py;
 	char	***arr;
+	void	*pac_man[2];
+	int		last_frame_time;
+	int		current_frame;
+	double	current_time;
 	t_map	*map;
 }			t_player;
 
@@ -49,22 +57,26 @@ typedef struct s_player
 # define COLLECTIBLES 'C'
 # define EXIT_MAP 'E'
 # define PERSONAGE 'P'
+# define FRAME_DELAY 6130
 
 int			is_correct_map(t_map *map);
 int			ft_validate(char *str, t_map *map);
 void		print_error(t_map *map, char *str, int code);
 void		ft_free(char **str, int width);
-void		move_player(t_map *map, char behavior);
-int			key_hook(int keycode, t_map *map);
-int			close_game(t_map *map);
+void		move_player(t_player *player, char behavior);
+int			key_hook(int keycode, t_player *player);
+void		choose_img(t_player *player, int x, int y);
+int			close_game(t_player *player);
 void		player_position(t_map *map, int *x, int *y);
 
-void		move_left(t_map *map, int x, int y, int coin);
-void		move_right(t_map *map, int x, int y, int coin);
-void		move_bottom(t_map *map, int x, int y, int coin);
-void		move_top(t_map *map, int x, int y, int coin);
+void		move_left(t_player *player, int x, int y, int coin);
+void		move_right(t_player *player, int x, int y, int coin);
+void		move_bottom(t_player *player, int x, int y, int coin);
+void		move_top(t_player *player, int x, int y, int coin);
 
-void		render(t_map *map);
+int			update_animation(t_player *player);
+int			player_init(t_player *player);
+void		render(t_player *player);
 int			count_coins(t_map *map);
 char		**matrix(char *file_name, int width);
 #endif
