@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/03 23:13:57 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:20:30 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 typedef struct s_map
 {
 	char	**map_matrix;
+	char	*str;
+	int		fd;
 	void	*mlx_ptr;
 	void	*mlx_win;
 	void	*map_wall;
 	void	*map_collectibles;
 	void	*map_exit;
 	int		all_size;
-	// void	*map_personage;
 	int		x;
 	int		y;
 	int		behavior;
@@ -40,7 +41,11 @@ typedef struct s_player
 	int		px;
 	int		py;
 	char	***arr;
-	void	*pac_man[2];
+	void	**pac_man;
+	void	*pac_man_left;
+	void	*pac_man_right;
+	void	*pac_man_down;
+	void	*pac_man_up;
 	int		last_frame_time;
 	int		current_frame;
 	double	current_time;
@@ -57,7 +62,7 @@ typedef struct s_player
 # define COLLECTIBLES 'C'
 # define EXIT_MAP 'E'
 # define PERSONAGE 'P'
-# define FRAME_DELAY 6130
+# define FRAME_DELAY 2000
 
 int			is_correct_map(t_map *map);
 int			ft_validate(char *str, t_map *map);
@@ -79,4 +84,8 @@ int			player_init(t_player *player);
 void		render(t_player *player);
 int			count_coins(t_map *map);
 char		**matrix(char *file_name, int width);
+
+int			is_correct_name(char *name);
+int			ft_validate(char *file_name, t_map *map);
+void		flood_fill(t_player *player, int x, int y, char new);
 #endif

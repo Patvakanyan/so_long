@@ -1,10 +1,11 @@
 NAME		=	so_long
 
-SRC			= so_long.c validate.c so_long_utils.c so_long_moves.c so_player_move.c so_long_bonus.c
+SRC			= so_long.c validate.c so_long_utils.c so_long_moves.c so_player_move.c so_long_bonus.c \
+				valideate_helper.c
 OBJ			= $(SRC:.c=.o)
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror  -g3
+CFLAGS		= -Wall -Wextra -Werror -g3 #-fsanitize=address
 MLX_FLAGS	= -Lmlx -lmlx -lXext -lX11 -lm
 
 LIBFT_DIR	= libft
