@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:25:39 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/05 18:23:53 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/05 23:47:55 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	key_behavior(t_player *player)
 
 int	img_init(t_player *player)
 {
-	player->map->all_size = SIZE;
 	player->map->map_wall = mlx_xpm_file_to_image(player->map->mlx_ptr,
 			"./sprites/Other/Walls/wall.xpm", &player->map->all_size,
 			&player->map->all_size);
@@ -43,17 +42,23 @@ int	img_init(t_player *player)
 		return (mlx_destroy_image(player->map->mlx_ptr, player->map->map_wall),
 			mlx_destroy_image(player->map->mlx_ptr,
 				player->map->map_collectibles),
-			mlx_destroy_image(player->map->mlx_ptr, player->map->map_exit), 0);
+			mlx_destroy_image(player->map->mlx_ptr, player->map->map_exit),
+			free(player->pac_man), 0);
 	return (1);
 }
-// map->map_personage = mlx_xpm_file_to_image(map->mlx_ptr,
-// 		"./sprites/Pac-Man/pac_closed.xpm", &map->all_size ,&map->all_size );
-// if (!(map->map_personage))
 
 int	ft_draw_map(char *file_name, t_map *map, t_player *player)
 {
+	if (!img_init(player))
+	{
+		mlx_destroy_window(player->map->mlx_ptr, player->map->mlx_win);
+		mlx_destroy_display(player->map->mlx_ptr);
+		free(player->map->mlx_ptr);
+		free(player);
+		return (0);
+	}
 	map->map_matrix = matrix(file_name, map->width);
-	if (!img_init(player) || !(map->map_matrix) || !is_correct_map(map))
+	if (!(map->map_matrix) || !is_correct_map(map))
 		return (close_game(player), 0);
 	render(player);
 	return (1);
@@ -66,8 +71,10 @@ int	ft_draw(char *file_name, t_map *map)
 	map->behavior = 0;
 	player = malloc(sizeof(t_player));
 	player->map = map;
-	player->last_frame_time = 0;
 	player->current_frame = 0;
+	player->monster_behavior = 0;
+	player->monster_frame = 0;
+	player->map->all_size = SIZE;
 	if (!player)
 		return (0);
 	map->mlx_ptr = mlx_init();
@@ -77,10 +84,9 @@ int	ft_draw(char *file_name, t_map *map)
 			(map->width * SIZE), "so_long");
 	if (!map->mlx_win)
 		return (mlx_destroy_display(map->mlx_ptr), free(player),
-			free(map->mlx_ptr), 0);
+			free(map->mlx_ptr), free(player), 0);
 	if (!ft_draw_map(file_name, map, player))
-		return (mlx_destroy_display(map->mlx_ptr), free(player),
-			free(map->mlx_ptr), 0);
+		return (0);
 	key_behavior(player);
 	mlx_loop_hook(player->map->mlx_ptr, update_animation, player);
 	mlx_loop(map->mlx_ptr);

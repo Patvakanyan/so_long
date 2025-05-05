@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:15:55 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/05 18:57:19 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:47:41 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ int	close_game(t_player *player)
 	mlx_destroy_image(player->map->mlx_ptr, player->pac_man_up);
 	mlx_destroy_image(player->map->mlx_ptr, player->pac_man_down);
 	mlx_destroy_image(player->map->mlx_ptr, player->pac_man_left);
+	mlx_destroy_image(player->map->mlx_ptr, player->monster[0]);
+	mlx_destroy_image(player->map->mlx_ptr, player->monster[1]);
 	mlx_destroy_image(player->map->mlx_ptr, player->pac_man_right);
 	mlx_destroy_window(player->map->mlx_ptr, player->map->mlx_win);
 	mlx_destroy_display(player->map->mlx_ptr);
 	free(player->pac_man);
+	free(player->monster);
 	free(player->map->mlx_ptr);
 	ft_free(player->map->map_matrix, player->map->width);
 	free(player->map);

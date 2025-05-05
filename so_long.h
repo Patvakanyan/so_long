@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/05 19:20:30 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 00:07:16 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,14 @@ typedef struct s_player
 	int		py;
 	char	***arr;
 	void	**pac_man;
+	void	**monster;
+	int		monster_frame;
+	int		monster_behavior;
+	int		monster_step;
 	void	*pac_man_left;
 	void	*pac_man_right;
 	void	*pac_man_down;
 	void	*pac_man_up;
-	int		last_frame_time;
 	int		current_frame;
 	double	current_time;
 	t_map	*map;
@@ -62,7 +65,10 @@ typedef struct s_player
 # define COLLECTIBLES 'C'
 # define EXIT_MAP 'E'
 # define PERSONAGE 'P'
+# define MONSTER 'M'
 # define FRAME_DELAY 2000
+# define MONSTER_RENDER 1000
+# define MONSTER_STEP 250
 
 int			is_correct_map(t_map *map);
 int			ft_validate(char *str, t_map *map);
@@ -80,6 +86,7 @@ void		move_bottom(t_player *player, int x, int y, int coin);
 void		move_top(t_player *player, int x, int y, int coin);
 
 int			update_animation(t_player *player);
+int			update_monster(t_player *player);
 int			player_init(t_player *player);
 void		render(t_player *player);
 int			count_coins(t_map *map);
@@ -88,4 +95,6 @@ char		**matrix(char *file_name, int width);
 int			is_correct_name(char *name);
 int			ft_validate(char *file_name, t_map *map);
 void		flood_fill(t_player *player, int x, int y, char new);
+int			monster_init(t_player *player);
+void		monster_step(t_player *player);
 #endif

@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:50:22 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/05 18:43:12 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 00:20:39 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	choose_img(t_player *player, int x, int y)
 	else if (player->map->map_matrix[y][x] == COLLECTIBLES)
 		mlx_put_image_to_window(player->map->mlx_ptr, player->map->mlx_win,
 			player->map->map_collectibles, x * SIZE, y * SIZE);
+	else if (player->map->map_matrix[y][x] == MONSTER || player->map->map_matrix[y][x] == 'K')
+		mlx_put_image_to_window(player->map->mlx_ptr, player->map->mlx_win,
+			player->monster[player->monster_frame], x * SIZE, y * SIZE);
 }
 
 int	count_coins(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:45:31 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/02 16:24:45 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/05 23:52:23 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	move_left(t_player *player, int x, int y, int coin)
 {
+	if (player->map->map_matrix[y][x - 1] == MONSTER)
+		close_game(player);
 	if (coin && player->map->map_matrix[y][x - 1] == EXIT_MAP)
 	{
 		player->map->map_matrix[y][x - 1] = 'T';
@@ -35,6 +37,8 @@ void	move_left(t_player *player, int x, int y, int coin)
 
 void	move_right(t_player *player, int x, int y, int coin)
 {
+	if (player->map->map_matrix[y][x + 1] == MONSTER)
+		close_game(player);
 	if (coin && player->map->map_matrix[y][x + 1] == EXIT_MAP)
 	{
 		player->map->map_matrix[y][x + 1] = 'T';
@@ -56,6 +60,8 @@ void	move_right(t_player *player, int x, int y, int coin)
 
 void	move_bottom(t_player *player, int x, int y, int coin)
 {
+	if (player->map->map_matrix[y + 1][x] == MONSTER)
+		close_game(player);
 	if (coin && player->map->map_matrix[y + 1][x] == EXIT_MAP)
 	{
 		player->map->map_matrix[y + 1][x] = 'T';
@@ -77,6 +83,8 @@ void	move_bottom(t_player *player, int x, int y, int coin)
 
 void	move_top(t_player *player, int x, int y, int coin)
 {
+	if (player->map->map_matrix[y - 1][x] == MONSTER)
+		close_game(player);
 	if (coin && player->map->map_matrix[y - 1][x] == EXIT_MAP)
 	{
 		player->map->map_matrix[y - 1][x] = 'T';

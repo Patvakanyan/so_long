@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:15:59 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/05 19:18:57 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/05 23:47:47 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	is_correct_str(char *str, int len)
 	i = -1;
 	while (str[++i])
 		if (str[i] != WALL && str[i] != COLLECTIBLES && str[i] != EXIT_MAP
-			&& str[i] != PERSONAGE && str[i] != '0' && str[i] != '\n')
+			&& str[i] != PERSONAGE && str[i] != '0' && str[i] != MONSTER
+			&& str[i] != '\n')
 			return (0);
 	return (1);
 }
