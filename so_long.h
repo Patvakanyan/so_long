@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 12:11:04 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:33:04 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft/libft.h"
 # include "mlx/mlx.h"
-// # include <stdio.h>
 # include <string.h>
 
 typedef struct s_map
@@ -40,19 +39,20 @@ typedef struct s_player
 {
 	int		px;
 	int		py;
-	int		is_wall;
+	int		is_wall_x;
 	char	***arr;
 	void	**pac_man;
 	void	**monster;
 	int		monster_frame;
 	int		monster_behavior;
 	int		monster_step;
+	int		current_frame;
+	int		counter;
+	char	*counter_put;
 	void	*pac_man_left;
 	void	*pac_man_right;
 	void	*pac_man_down;
 	void	*pac_man_up;
-	int		current_frame;
-	double	current_time;
 	t_map	*map;
 }			t_player;
 
@@ -67,9 +67,9 @@ typedef struct s_player
 # define EXIT_MAP 'E'
 # define PERSONAGE 'P'
 # define MONSTER 'M'
-# define FRAME_DELAY 200
-# define MONSTER_RENDER 250
-# define MONSTER_STEP 100
+# define FRAME_DELAY 5000
+# define MONSTER_RENDER 30000
+# define MONSTER_STEP 30000
 
 int			is_correct_map(t_map *map);
 int			ft_validate(char *str, t_map *map);
@@ -80,6 +80,7 @@ int			key_hook(int keycode, t_player *player);
 void		choose_img(t_player *player, int x, int y);
 int			close_game(t_player *player);
 void		player_position(t_map *map, int *x, int *y);
+void		monster_position(t_map *map, int *x, int *y);
 
 void		move_left(t_player *player, int x, int y, int coin);
 void		move_right(t_player *player, int x, int y, int coin);
@@ -98,4 +99,9 @@ int			ft_validate(char *file_name, t_map *map);
 void		flood_fill(t_player *player, int x, int y, char new);
 int			monster_init(t_player *player);
 void		monster_step(t_player *player);
+int			player_init(t_player *player);
+int			monster_init(t_player *player);
+int			pac_man_init(t_player *player);
+int			img_init(t_player *player);
+
 #endif

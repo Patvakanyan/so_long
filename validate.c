@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:31:34 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/05 19:22:02 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:24:34 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	ft_correct_wall(char **map_copy, t_map *map)
 		while (++player->py < map->height)
 		{
 			if (map_copy[player->px][player->py] != 'X'
-				&& map_copy[player->px][player->py] != '1')
+				&& map_copy[player->px][player->py] != '1'
+				&& map_copy[player->px][player->py] != 'M')
 				return (free(player), 0);
 		}
 	}

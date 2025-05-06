@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:15:55 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/05 20:47:41 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:18:24 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,25 @@ void	move_player(t_player *player, char behavior)
 	}
 }
 
+static void	put_zoomed_text(t_player *player, int x, int y, char *text)
+{
+	int	dx;
+	int	dy;
+
+	dx = 0;
+	while (dx < 2)
+	{
+		dy = 0;
+		while (dy < 2)
+		{
+			mlx_string_put(player->map->mlx_ptr, player->map->mlx_win, x + dx, y
+				+ dy, 0xFFFFFF, text);
+			dy++;
+		}
+		dx++;
+	}
+}
+
 void	render(t_player *player)
 {
 	player->map->y = -1;
@@ -89,4 +108,7 @@ void	render(t_player *player)
 		while (++(player->map->x) < player->map->height)
 			choose_img(player, player->map->x, player->map->y);
 	}
+	player->counter_put = ft_itoa(player->counter);
+	put_zoomed_text(player, 20, 20, player->counter_put);
+	free(player->counter_put);
 }

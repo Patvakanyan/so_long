@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:25:39 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 12:21:57 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:37:52 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,13 @@ int	ft_draw_map(char *file_name, t_map *map, t_player *player)
 	return (1);
 }
 
-int	ft_draw(char *file_name, t_map *map)
+int	ft_draw(char *file_name, t_map *map, t_player *player)
 {
-	t_player	*player;
-
+	player->counter = 0;
 	map->behavior = 0;
-	player = malloc(sizeof(t_player));
-	if (!player)
-		return (0);
 	player->current_frame = 0;
 	player->monster_behavior = 0;
-	player->is_wall = -1;
+	player->is_wall_x = -1;
 	player->monster_frame = 0;
 	map->all_size = SIZE;
 	map->mlx_ptr = mlx_init();
@@ -96,15 +92,22 @@ int	ft_draw(char *file_name, t_map *map)
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
+	t_map		*map;
+	t_player	*player;
 
+	player = malloc(sizeof(t_player));
+	if (!player)
+		return (0);
 	map = malloc(sizeof(t_map));
 	if (!map)
 		print_error(NULL, "Error\n", STDERR_FILENO);
 	if (argc != 2)
 		print_error(map, "Error\n", STDERR_FILENO);
 	if (!ft_validate(argv[1], map))
+	{
+		free(player);
 		print_error(map, "Error\n", STDERR_FILENO);
-	if (!ft_draw(argv[1], map))
+	}
+	if (!ft_draw(argv[1], map, player))
 		print_error(map, "Error\n", STDERR_FILENO);
 }

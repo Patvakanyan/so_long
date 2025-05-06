@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:15:59 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 11:48:00 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:16:01 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	is_correct_str(char *str, int len)
 void	flood_fill(t_player *player, int x, int y, char new)
 {
 	if (x < 0 || y < 0 || x >= player->map->width || y >= player->map->height
-		|| (*player->arr)[x][y] == '1' || (*player->arr)[x][y] == 'X')
+		|| (*player->arr)[x][y] == '1' || (*player->arr)[x][y] == 'X'
+		|| (*player->arr)[x][y] == 'M')
 		return ;
 	(*player->arr)[x][y] = new;
 	flood_fill(player, x - 1, y, new);
@@ -68,8 +69,6 @@ int	ft_validate(char *file_name, t_map *map)
 		map->str = get_next_line(map->fd);
 	}
 	close(map->fd);
-	if (map->height == map->width)
-		return (0);
 	return (1);
 }
 
