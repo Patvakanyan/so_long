@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:31:34 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 19:24:34 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:14:44 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,21 @@ int	ft_correct_wall(char **map_copy, t_map *map)
 	return (free(player), 1);
 }
 
+int	ft_up_down_wall(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (++i < map->height)
+		if (map->map_matrix[0][i] != '1')
+			return (0);
+	i = -1;
+	while (++i < map->height)
+		if (map->map_matrix[map->width - 1][i] != '1')
+			return (0);
+	return (1);
+}
+
 int	is_correct_map(t_map *map)
 {
 	char	**map_copy;
@@ -98,7 +113,7 @@ int	is_correct_map(t_map *map)
 		if (!map_copy[i])
 			return (ft_free(map_copy, i), 0);
 	}
-	if (!ft_correct_wall(map_copy, map))
+	if (!ft_correct_wall(map_copy, map) || !ft_up_down_wall(map))
 		return (ft_free(map_copy, map->width), 0);
 	return (ft_free(map_copy, map->width), 1);
 }

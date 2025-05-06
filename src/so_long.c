@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:25:39 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 19:37:52 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:00:08 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,16 @@ int	main(int argc, char **argv)
 		return (0);
 	map = malloc(sizeof(t_map));
 	if (!map)
+	{
+		free(player);
 		print_error(NULL, "Error\n", STDERR_FILENO);
+	}
 	if (argc != 2)
 		print_error(map, "Error\n", STDERR_FILENO);
 	if (!ft_validate(argv[1], map))
 	{
 		free(player);
-		print_error(map, "Error\n", STDERR_FILENO);
+		print_error(map, "Error validate!\n", STDERR_FILENO);
 	}
 	if (!ft_draw(argv[1], map, player))
 		print_error(map, "Error\n", STDERR_FILENO);

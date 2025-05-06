@@ -6,16 +6,15 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 19:33:04 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:32:24 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "libft/libft.h"
-# include "mlx/mlx.h"
-# include <string.h>
+# include "../libft/libft.h"
+# include "../mlx/mlx.h"
 
 typedef struct s_map
 {

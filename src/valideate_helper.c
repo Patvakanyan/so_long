@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:15:59 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 16:16:01 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:21:36 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	is_correct_name(char *name)
 	char	*dup_str;
 
 	tmp = ft_strrchr(name, '.');
+	if (!tmp)
+		return (0);
 	dup_str = ft_strdup(tmp);
 	if (ft_strcmp(dup_str, ".ber"))
 		return (free(dup_str), 0);
