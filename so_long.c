@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:25:39 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/05 23:47:55 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:21:57 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	img_init(t_player *player)
 
 int	ft_draw_map(char *file_name, t_map *map, t_player *player)
 {
+	player->map = map;
 	if (!img_init(player))
 	{
 		mlx_destroy_window(player->map->mlx_ptr, player->map->mlx_win);
@@ -70,13 +71,13 @@ int	ft_draw(char *file_name, t_map *map)
 
 	map->behavior = 0;
 	player = malloc(sizeof(t_player));
-	player->map = map;
-	player->current_frame = 0;
-	player->monster_behavior = 0;
-	player->monster_frame = 0;
-	player->map->all_size = SIZE;
 	if (!player)
 		return (0);
+	player->current_frame = 0;
+	player->monster_behavior = 0;
+	player->is_wall = -1;
+	player->monster_frame = 0;
+	map->all_size = SIZE;
 	map->mlx_ptr = mlx_init();
 	if (!(map->mlx_ptr))
 		return (0);

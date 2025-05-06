@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:22:15 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 00:07:16 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:11:04 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_player
 {
 	int		px;
 	int		py;
+	int		is_wall;
 	char	***arr;
 	void	**pac_man;
 	void	**monster;
@@ -66,9 +67,9 @@ typedef struct s_player
 # define EXIT_MAP 'E'
 # define PERSONAGE 'P'
 # define MONSTER 'M'
-# define FRAME_DELAY 2000
-# define MONSTER_RENDER 1000
-# define MONSTER_STEP 250
+# define FRAME_DELAY 200
+# define MONSTER_RENDER 250
+# define MONSTER_STEP 100
 
 int			is_correct_map(t_map *map);
 int			ft_validate(char *str, t_map *map);

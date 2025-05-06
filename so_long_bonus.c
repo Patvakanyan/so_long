@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:20:18 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 00:24:33 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:27:11 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,19 +127,30 @@ static void	monster_position(t_map *map, int *x, int *y)
 				|| map->map_matrix[*y][*x] == 'K')
 				return ;
 	}
+	*x = -1;
+	*y = -1;
 }
-
-void	monster_step(t_player *player)
+void	monster_left_right(t_player *player)
 {
-	player->py = -1;
-	monster_position(player->map, &(player->px), &(player->py));
-	if (player->map->map_matrix[player->py][player->px] == 'K')
-		close_game(player);
-	if (player->map->map_matrix[player->py][player->px - 1] != EXIT_MAP
-		&& player->map->map_matrix[player->py][player->px - 1] != WALL
-		&& player->map->map_matrix[player->py][player->px + 1] != EXIT_MAP
+	// ft_printf("%d\n", player->is_wall);
+	if (player->map->map_matrix[player->py][player->px + 1] == EXIT_MAP
+		|| player->map->map_matrix[player->py][player->px + 1] == WALL)
+		player->is_wall = -1;
+	else
+		player->is_wall = 1;
+	if (player->map->map_matrix[player->py][player->px + 1] != EXIT_MAP
 		&& player->map->map_matrix[player->py][player->px + 1] != WALL
-		&& player->monster_behavior == MONSTER_STEP)
+		&& player->monster_behavior == MONSTER_STEP && player->is_wall == 1)
+	{
+		if (player->map->map_matrix[player->py][player->px + 1] == PERSONAGE)
+			player->map->map_matrix[player->py][player->px + 1] = 'K';
+		else
+			player->map->map_matrix[player->py][player->px + 1] = MONSTER;
+		player->map->map_matrix[player->py][player->px] = '0';
+	}
+	else if (player->map->map_matrix[player->py][player->px - 1] != EXIT_MAP
+		&& player->map->map_matrix[player->py][player->px - 1] != WALL
+		&& player->monster_behavior == MONSTER_STEP && player->is_wall == -1)
 	{
 		if (player->map->map_matrix[player->py][player->px - 1] == PERSONAGE)
 			player->map->map_matrix[player->py][player->px - 1] = 'K';
@@ -147,6 +158,17 @@ void	monster_step(t_player *player)
 			player->map->map_matrix[player->py][player->px - 1] = MONSTER;
 		player->map->map_matrix[player->py][player->px] = '0';
 	}
+}
+
+void	monster_step(t_player *player)
+{
+	player->py = -1;
+	monster_position(player->map, &(player->px), &(player->py));
+	if (player->py == -1 && player->px == -1)
+		return ;
+	if (player->map->map_matrix[player->py][player->px] == 'K')
+		close_game(player);
+	monster_left_right(player);
 	if (player->monster_step == MONSTER_STEP)
 		player->monster_step = 0;
 	else
