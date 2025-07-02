@@ -6,7 +6,7 @@
 /*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:20:18 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/05/06 20:27:45 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/07/03 00:41:25 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ void	is_wall_monster(t_player *player)
 
 int	is_between(t_player *player)
 {
-	int	flag;
-
-	flag = 0;
 	if ((player->map->map_matrix[player->py][player->px + 1] == WALL
 		|| player->map->map_matrix[player->py][player->px + 1] == EXIT_MAP
 		|| player->map->map_matrix[player->py][player->px + 1] == 'C')
